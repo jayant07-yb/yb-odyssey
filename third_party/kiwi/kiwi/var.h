@@ -280,6 +280,9 @@ __attribute__((hot)) static inline int kiwi_vars_cas(kiwi_vars_t *client,
 		memcpy(query + pos, ";", 1);
 		pos += 1;
 	}
+	/* Set the user */
+
+	/* Set the Database */
 
 	return pos;
 }
