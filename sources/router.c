@@ -362,15 +362,16 @@ od_router_status_t od_router_route(od_router_t *router, od_client_t *client)
 		od_router_unlock(router);
 		return OD_ROUTER_ERROR_NOT_FOUND;
 	}
-
+	/* TODO-yb: Have a look on this allocation */
 	/* force settings required by route */
+	/* TODO-yb: Change the database and user here to a global datbase */
 	od_route_id_t id = { .database = startup->database.value,
 			     .user = startup->user.value,
 			     .database_len = startup->database.value_len,
 			     .user_len = startup->user.value_len,
 			     .physical_rep = false,
 			     .logical_rep = false };
-	if (rule->storage_db) {
+	if (rule->storage_db) {	/* Use the something like storage_database */
 		id.database = rule->storage_db;
 		id.database_len = strlen(rule->storage_db) + 1;
 	}
