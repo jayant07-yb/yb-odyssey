@@ -198,7 +198,7 @@ od_frontend_attach(od_client_t *client, char *context,
 		   kiwi_params_t *route_params)
 {
 	od_instance_t *instance = client->global->instance;
-	od_router_t *router = client->global->router;
+	od_router_t *router = client->global->router;	// Change this to the global router
 	od_route_t *route = client->route;
 
 	bool wait_for_idle = false;
