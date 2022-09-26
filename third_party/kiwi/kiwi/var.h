@@ -281,7 +281,7 @@ __attribute__((hot)) static inline int kiwi_vars_cas(kiwi_vars_t *client,
 		pos += 1;
 	}
 	/* TODO-yb: Set the user */
-
+	memcpy(query + pos,"set application_name =  1 ; ",28);
 	/* TODO-yb: Set the Database */
 
 	return pos;
