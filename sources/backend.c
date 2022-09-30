@@ -92,6 +92,13 @@ int od_backend_ready(od_server_t *server, char *data, uint32_t size)
 		return -1;
 	
 	od_instance_t *instance = server->global->instance;
+	if(status == 'i')
+	{
+		od_log(&instance->logger, "startup", NULL, server, "received packet type: i");
+		status = 'I';
+		data[5] = 'I';
+	}
+	
 	if(status == 't')
 	{
 		od_log(&instance->logger, "startup", NULL, server, "received packet type: t");
@@ -101,7 +108,7 @@ int od_backend_ready(od_server_t *server, char *data, uint32_t size)
 
 	if(status == 'e')
 	{
-		od_log(&instance->logger, "startup", NULL, server, "received packet type: t");
+		od_log(&instance->logger, "startup", NULL, server, "received packet type: e");
 		status = 'E';
 		data[5] = 'E';
 	}
