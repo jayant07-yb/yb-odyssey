@@ -110,12 +110,16 @@ static inline int od_backend_startup(od_server_t *server,
 {
 	od_instance_t *instance = server->global->instance;
 	od_route_t *route = server->route;
-	kiwi_fe_arg_t argv[] = { { "user", 5 },
+	kiwi_fe_arg_t argv[] = { 
+				 { "connection_pooler", 18 },
+				 { "1", 2 },
+				 { "user", 5 },
 				 { route->id.user, route->id.user_len },
 				 { "database", 9 },
 				 { route->id.database, route->id.database_len },
-				 { "replication", 12 },
-				 { NULL, 0 } };
+				 { "replication", 12 },				
+				 { NULL, 0 }};
+
 	int argc = 4;
 	if (route->id.physical_rep) {
 		argc = 6;
