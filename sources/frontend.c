@@ -1029,6 +1029,12 @@ static od_frontend_status_t od_frontend_remote_client(od_relay_t *relay,
 				break; // skip this, we obly need to rewrite statement
 			}
 
+			if(strcmp(operator_name, "")==0)
+			{
+				retstatus = OD_OK;
+				break; // skip the unnamed statement
+			}	
+
 			assert(client->prep_stmt_ids);
 			retstatus = OD_SKIP;
 			int opname_start_offset =
@@ -1151,6 +1157,12 @@ static od_frontend_status_t od_frontend_remote_client(od_relay_t *relay,
 			rc = kiwi_be_read_parse_dest(data, size, &desc);
 			if (rc) {
 				return OD_ECLIENT_READ;
+			}
+			
+			if(strcmp(desc.operator_name, "")==0)
+			{
+				retstatus = OD_OK;
+				break; // SKIP
 			}
 
 			od_hash_t keyhash = od_murmur_hash(
@@ -1338,6 +1350,12 @@ static od_frontend_status_t od_frontend_remote_client(od_relay_t *relay,
 			od_hashmap_elt_t key;
 			key.len = operator_name_len;
 			key.data = operator_name;
+						
+			if(strcmp(operator_name, "")==0)
+			{
+				retstatus = OD_OK;
+				break; // SKIP
+			}
 
 			od_hash_t keyhash = od_murmur_hash(key.data, key.len);
 
