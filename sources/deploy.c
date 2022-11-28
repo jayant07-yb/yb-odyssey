@@ -28,7 +28,7 @@ int od_deploy(od_client_t *client, char *context)
 	query_size = kiwi_vars_cas(&client->vars, &server->vars, query,
 				   sizeof(query) - 1);
 
-	if  (query_size > 0) {
+	if (query_size > 0) {
 		query[query_size] = 0;
 		query_size++;
 		machine_msg_t *msg;
